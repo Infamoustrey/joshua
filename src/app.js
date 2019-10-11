@@ -59,12 +59,12 @@ gameSelection.on("select", (_, i) => {
 });
 
 async function run() {
-  // await typewriter(`Hello Professor.`, title, screen);
-  // await sleep(2000);
-  // await typewriter(`Want to play a game?`, title, screen);
-  // await sleep(3000);
-  // await typewriter(`What kind of game would you like to play?`, title, screen);
-  // await sleep(1000);
+  await typewriter(`Hello Professor.`, title, screen);
+  await sleep(2000);
+  await typewriter(`Want to play a game?`, title, screen);
+  await sleep(3000);
+  await typewriter(`What kind of game would you like to play?`, title, screen);
+  await sleep(1000);
   title.append(gameSelection);
   screen.render();
   gameSelection.focus();
