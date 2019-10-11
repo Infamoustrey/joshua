@@ -1,6 +1,7 @@
 const contrib = require("blessed-contrib");
 
 let map = contrib.map({
+  excludeAntartica: false,
   top: 0,
   right: 0,
   width: "80%",

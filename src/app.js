@@ -11,19 +11,51 @@ screen.append(title);
 screen.render();
 
 const gameSelection = require("./components/game-selection");
+const cityList = require("./components/city-list");
+const targetList = require("./components/target-list");
+
+const cities = require("./cities");
+
+cityList.key(["up", "down"], () => {
+  let city = cities[cityList.selected];
+  // map.clearMarkers();
+  let innerMap = map.innerMap;
+
+  innerMap.ctx.beginPath();
+
+  innerMap.ctx.moveTo(
+    innerMap.degreesOfLongitudeToScreenX(cities[1].lon),
+    innerMap.degreesOfLatitudeToScreenY(cities[1].lat)
+  );
+  innerMap.ctx.lineTo(
+    innerMap.degreesOfLongitudeToScreenX(cities[3].lon),
+    innerMap.degreesOfLatitudeToScreenY(cities[3].lat)
+  );
+  innerMap.ctx.strokeStyle = "blue";
+  innerMap.ctx.stroke();
+  innerMap.ctx.closePath();
+
+  screen.render();
+});
+
+targetList.key("tab", () => {
+  cityList.focus();
+});
+
+cityList.key(["tab"], () => {
+  targetList.focus();
+});
+
+cityList.on("select", (_, i) => {});
 
 gameSelection.on("select", (_, i) => {
   screen.remove(title);
   screen.append(map);
+  screen.append(cityList);
+  screen.append(targetList);
 
   screen.render();
-
-  map.addMarker({
-    lon: "-95.6563",
-    lat: "29.9343",
-    color: "red",
-    char: "O"
-  });
+  cityList.focus();
 });
 
 async function run() {
